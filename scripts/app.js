@@ -51,14 +51,14 @@
     var key = selected.value;
     var label = selected.textContent;
     if(!app.selectedCities){
-      app.selectedCities[];
+      app.selectedCities = [];
     }
 
     // TODO init the app.selectedCities array here
     app.getForecast(key, label);
     // TODO push the selected city to the array and save here
     app.selectedCities.push({key:key, label:label});
-    
+
     app.saveSelectedCities();
 
     app.toggleAddDialog(false);
@@ -323,13 +323,13 @@
 
   if(app.selectedCities){
     app.selectedCities = JSON.parse(app.selectedCities);
-    app.selectedCities.forEach(function(){
+    app.selectedCities.forEach(function(city){
       app.getForecast(city.key, city.label);
     });
   }else{
     app.updateForecastCard(initialWeatherForecast);
     app.selectedCities =[
-      {key:initialWheaterForecast.key, label: initialWeatherForecast.label}
+      {key:initialWeatherForecast.key, label: initialWeatherForecast.label}
     ];
     app.saveSelectedCities();
   }
